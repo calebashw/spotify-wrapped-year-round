@@ -6,11 +6,14 @@ const Login = () => {
   if (!CLIENT_ID) {
     console.error("Spotify CLIENT_ID is missing. Please check your .env file.");
   }
-  console.log(CLIENT_ID);
 
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(
     REDIRECT_URI
   )}&scope=${encodeURIComponent(SCOPES)}`;
+
+  console.log("CLIENT_ID:", CLIENT_ID);
+  console.log("Redirect URI:", REDIRECT_URI);
+  console.log("Auth URL:", authUrl);
 
   return (
     <div>
