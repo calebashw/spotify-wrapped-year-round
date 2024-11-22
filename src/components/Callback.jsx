@@ -8,21 +8,32 @@ const Callback = () => {
 
   useEffect(() => {
     console.log("Callback route hit!");
-    const hash = window.location.hash; // Log the entire hash
+    const hash = window.location.hash;
+    console.log("Current URL:", window.location.href);
     console.log("Full URL Hash:", hash);
+
+    if (!hash) {
+      console.error("URL hash is empty. Spotify may not have redirected correctly.");
+      navigate("/");
+      return;
+    }
 
     const params = new URLSearchParams(hash.substring(1));
     const accessToken = params.get("access_token");
     console.log("Parsed Access Token:", accessToken);
 
     if (accessToken) {
+      console.log("Access token found. Storing and navigating to /dashboard...");
       setAccessToken(accessToken);
       localStorage.setItem("spotifyAccessToken", accessToken);
       window.location.hash = ""; // Clear the hash
-      console.log("Navigating to /dashboard...");
-      navigate("/dashboard");
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000); // Delay for logs/UI updates
     } else {
-      console.error("Access token not found. Redirecting to login...");
+      console.error("Access token is missing or malformed in the URL hash:", hash);
+      localStorage.removeItem("spotifyAccessToken");
       navigate("/");
     }
   }, [navigate, setAccessToken]);

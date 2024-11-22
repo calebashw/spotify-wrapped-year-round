@@ -1,10 +1,11 @@
 const Login = () => {
   const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || "http://localhost:3000/callback";
   const SCOPES = "user-top-read";
 
   if (!CLIENT_ID) {
     console.error("Spotify CLIENT_ID is missing. Please check your .env file.");
+    return <p>Error: Missing Spotify CLIENT_ID. Please check your configuration.</p>;
   }
 
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(
