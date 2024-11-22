@@ -1,29 +1,24 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useSpotifyStore from "../store/spotifyStore"; // Zustand store
+import useSpotifyStore from "../store/spotifyStore";
 
 const Callback = () => {
   const navigate = useNavigate();
   const setAccessToken = useSpotifyStore((state) => state.setAccessToken);
-  console.log("Callback component loaded");
-
 
   useEffect(() => {
-    const hash = window.location.hash;
+    console.log("Callback route hit!");
+    const hash = window.location.hash; // Log the entire hash
+    console.log("Full URL Hash:", hash);
+
     const params = new URLSearchParams(hash.substring(1));
     const accessToken = params.get("access_token");
-  
+    console.log("Parsed Access Token:", accessToken);
+
     if (accessToken) {
-      console.log("Access Token:", accessToken);
-  
-      // Save token
       setAccessToken(accessToken);
       localStorage.setItem("spotifyAccessToken", accessToken);
-  
-      // Clear the hash
-      window.location.hash = "";
-  
-      // Log navigation attempt
+      window.location.hash = ""; // Clear the hash
       console.log("Navigating to /dashboard...");
       navigate("/dashboard");
     } else {
@@ -31,9 +26,8 @@ const Callback = () => {
       navigate("/");
     }
   }, [navigate, setAccessToken]);
-  
 
-  return <div>Loading...</div>; // Display a loading message while processing
+  return <div>Callback Route Loaded. Processing...</div>;
 };
 
 export default Callback;

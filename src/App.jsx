@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 // import useSpotifyStore from "./store/spotifyStore"; // Zustand store
-import Callback from "./components/Callback"; // New callback component
+import Callback from "./components/Callback";
 
 const App = () => {
   return (
