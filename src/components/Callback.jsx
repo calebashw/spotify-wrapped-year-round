@@ -5,6 +5,8 @@ import useSpotifyStore from "../store/spotifyStore"; // Zustand store
 const Callback = () => {
   const navigate = useNavigate();
   const setAccessToken = useSpotifyStore((state) => state.setAccessToken);
+  console.log("Callback component loaded");
+
 
   useEffect(() => {
     const hash = window.location.hash;
