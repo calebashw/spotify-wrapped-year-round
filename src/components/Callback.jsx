@@ -7,29 +7,29 @@ const Callback = () => {
   const setAccessToken = useSpotifyStore((state) => state.setAccessToken);
 
   useEffect(() => {
-    const hash = window.location.hash; // Get the URL fragment
-    const params = new URLSearchParams(hash.substring(1)); // Parse the fragment
+    const hash = window.location.hash;
+    const params = new URLSearchParams(hash.substring(1));
     const accessToken = params.get("access_token");
-
+  
     if (accessToken) {
       console.log("Access Token:", accessToken);
-
-      // Save the token to Zustand
+  
+      // Save token
       setAccessToken(accessToken);
-
-      // Optionally save to localStorage for persistence
       localStorage.setItem("spotifyAccessToken", accessToken);
-
-      // Clear the hash from the URL
+  
+      // Clear the hash
       window.location.hash = "";
-
-      // Redirect to the dashboard
+  
+      // Log navigation attempt
+      console.log("Navigating to /dashboard...");
       navigate("/dashboard");
     } else {
-      console.error("Access token not found in the URL.");
-      navigate("/"); // Redirect to login if no token is found
+      console.error("Access token not found. Redirecting to login...");
+      navigate("/");
     }
   }, [navigate, setAccessToken]);
+  
 
   return <div>Loading...</div>; // Display a loading message while processing
 };
