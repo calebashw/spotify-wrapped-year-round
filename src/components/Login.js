@@ -1,7 +1,10 @@
 const Login = () => {
   const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || "http://localhost:3000/callback";
+  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || "https://year-round-wrapped.onrender.com/callback";
   const SCOPES = "user-top-read";
+
+  console.log("Deployed REACT_APP_REDIRECT_URI:", process.env.REACT_APP_REDIRECT_URI);
+
 
   if (!CLIENT_ID) {
     console.error("Spotify CLIENT_ID is missing. Please check your .env file.");
