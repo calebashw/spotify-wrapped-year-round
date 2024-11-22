@@ -21,12 +21,12 @@ const AppRoutes = () => {
 
     if (window.location.hash.includes("access_token")) {
       const hash = window.location.hash;
-      console.log("URL Hash:", hash);
+      // console.log("URL Hash:", hash);
 
       const params = new URLSearchParams(hash.substring(1));
       const accessToken = params.get("access_token");
 
-      console.log("Access Token Retrieved:", accessToken);
+      // console.log("Access Token Retrieved:", accessToken);
 
       if (accessToken) {
         // Save to Zustand store
@@ -42,7 +42,7 @@ const AppRoutes = () => {
         navigate("/dashboard");
       }
     } else {
-      console.log("No access token found in URL hash.");
+      // console.log("No access token found in URL hash.");
     }
   }, [navigate, setAccessToken]);
 
